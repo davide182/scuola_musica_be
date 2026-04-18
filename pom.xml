@@ -83,11 +83,11 @@
             <version>2.1.0</version>
         </dependency>
 
-            <!-- Spring Boot Actuator - il protagonista di questo progetto -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-            </dependency>
+        <!-- Spring Boot Actuator - il protagonista di questo progetto -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
         <!-- Testing -->
         <dependency>

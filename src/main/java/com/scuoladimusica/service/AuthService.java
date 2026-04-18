@@ -4,6 +4,7 @@ import com.scuoladimusica.model.dto.request.LoginRequest;
 import com.scuoladimusica.model.dto.request.SignupRequest;
 import com.scuoladimusica.model.dto.response.JwtResponse;
 import com.scuoladimusica.model.dto.response.MessageResponse;
+import com.scuoladimusica.model.dto.response.UserInfoResponse;
 import com.scuoladimusica.model.entity.ERole;
 import com.scuoladimusica.model.entity.Role;
 import com.scuoladimusica.model.entity.User;
@@ -57,6 +58,21 @@ public class AuthService {
 
         return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail(), roles);
+    }
+
+    public UserInfoResponse getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+
+        return new UserInfoResponse(
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                roles
+        );
     }
 
     public MessageResponse registerUser(SignupRequest signupRequest) {

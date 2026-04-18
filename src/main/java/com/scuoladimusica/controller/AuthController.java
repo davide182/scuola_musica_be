@@ -4,6 +4,7 @@ import com.scuoladimusica.model.dto.request.LoginRequest;
 import com.scuoladimusica.model.dto.request.SignupRequest;
 import com.scuoladimusica.model.dto.response.JwtResponse;
 import com.scuoladimusica.model.dto.response.MessageResponse;
+import com.scuoladimusica.model.dto.response.UserInfoResponse;
 import com.scuoladimusica.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
         return ResponseEntity.ok(authService.registerUser(signupRequest));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserInfoResponse> getCurrentUser() {
+        return ResponseEntity.ok(authService.getCurrentUser());
     }
 }
